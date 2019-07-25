@@ -1,6 +1,7 @@
 //Can only require things that exist
 
 const inquirer = require("inquirer");
+const Words = require("./Words")
 
 
 //Start with an array of word choices.
@@ -13,10 +14,3 @@ const randomChoice = wordChoices[Math.floor(Math.random() * wordChoices.length)]
 
 
 
-const blanks = [];
-
-for(let i = 0; i < randomChoice.length; i++) {
-    
-   blanks.push("_");
-}
-console.log(blanks);
