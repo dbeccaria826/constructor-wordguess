@@ -3,7 +3,7 @@ function Letters (letter) {
     this.letter = letter
     this.status = false
 
-    this.checkGuess=function(userGuess) {
+    this.checkGuess = function(userGuess) {
         userGuess === this.letter ? this.status = true: this.status = false
     }
     this.checkCharacter = function () {
@@ -13,11 +13,7 @@ function Letters (letter) {
             return "_"
         }
     }
-    this.checkGuess = function(userGuess) {
-        if(userGuess === this.letter) {
-            this.status = true
-        }
-    }
+    
 }
 
 

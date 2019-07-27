@@ -8,9 +8,7 @@ function Word (word) {
             this.splitWords.push(new Letter(item, false))
         }
      }
-    //  this.displayGuess = function (userGuess) {
-    //     this.splitwords.forEach(item => letter.checkGuess(userGuess))
-    //  }
+    
      //Grabbing each letter object and calling a method on each letter to check for true/false
      this.checkCharacterValue = function() {
         let stringValue = ""

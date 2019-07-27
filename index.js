@@ -19,6 +19,7 @@ theWord.checkCharacterValue();
 // get user input use inquire
 //Write a function in words that takes in a user guess and displays it one the command line
 let newGame = () => {
+    const guessedLetters = []
     inquirer.prompt([
         {
             name:"userGuess",
@@ -28,7 +29,38 @@ let newGame = () => {
 
         }
     ]).then(response => {
-        console.log(response)
+       theWord.splitWords.forEach(item => {
+           theWord.currentLetter(response.userGuess)
+           guessedLetters.push(item.checkCharacter())
+       })
+       switch(guesses) {
+           case guesses > 0 && guessedLetters.indexOf("_") === -1:
+               guesses--
+               break;
+           case guesses === 0:
+               console.log("game over")
+               break;
+           case guesses !== 0:
+               currentLetter()
+               break;
+           default:
+               console.log(theWord.checkCharacterValue())
+               newGame()
+            
+       }
+    //    if(guesses > 0 && guessedLetters.indexOf("_") === -1) {
+    //        guesses = guesses - 1;
+    //        if(guesses === 0) {
+    //            console.log("Game Over")
+    //           another()
+           
+    //        } else {
+    //        currentLetter()
+    //        }
+    //    } else {
+    //        console.log(theWord.checkCharacterValue())
+    //        newGame()
+    //    }
     })
 }
 
