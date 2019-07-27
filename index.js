@@ -6,7 +6,7 @@ const gameWord = require("./wordChoices")
 //Check character value method takes the array of objects and displays blanks based on the true/false value of each letter
 
 function Game () {
-    this.word = ""
+    this.word = "I said good day sir!"
     this.attempts = 10
     this.guessesArray = []
     this.getWord = function() {
@@ -17,31 +17,27 @@ function Game () {
     }
 }
 
+function playGame() {
+    const newGame = new Game();
+   
+    inquirer.prompt([
+        {
+			name:"userInput",
+			message: `${newGame.getWord()} Guess a letter`
+        }
+    ]).then(response =>{
+		console.log(response.userInput)
+	})
 
-const newGame = new Game()
-
-newGame.getWord()
-console.log(`Letters guessed: ${newGame.guessesArray}`)
-console.log(`Your attempts: ${newGame.attempts}`)
 
 
+}
+   
+playGame()
+// console.log(`Letters guessed: ${newGame.guessesArray}`)
+// console.log(`Your attempts: ${newGame.attempts}`)
+// console.log(newGame.word)
 
-
-// const getUserGuess = () => {
-//     const guessedLetters = [];
-  
-//     inquirer.prompt([
-//         {
-//             name:'guessedLetter',
-//             message: `${getWord()} Guess Away!\n
-//             Your attempts: ${attempts}`
-//         }
-//     ]).then((response) => {
-        
-        
-//     })
-    
-// }
 
 //Take user input and compare it against the true/false value of each letter
 //If user guessed at all, starts game.
