@@ -13,6 +13,11 @@ function Letters (letter) {
             return "_"
         }
     }
+    this.checkGuess = function(userGuess) {
+        if(userGuess === this.letter) {
+            this.status = true
+        }
+    }
 }
 
 

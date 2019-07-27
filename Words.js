@@ -5,8 +5,7 @@ function Word (word) {
     this.splitWords = []
     this.getLetters = function (word) {
         for(let item of word) {
-            let letter = this.splitWords.push(new Letter(item, false))
-           
+            this.splitWords.push(new Letter(item, false))
         }
      }
     //  this.displayGuess = function (userGuess) {
@@ -16,24 +15,27 @@ function Word (word) {
      this.checkCharacterValue = function() {
         let stringValue = ""
         this.splitWords.forEach(item => {
-            console.log(item)
+           
             stringValue = stringValue + item.checkCharacter() + " " 
         })
         console.log(stringValue)
         
      }
+     this.currentLetter = function(guess) {
+         this.splitWords.forEach(item => {
+             item.checkGuess(guess)
+         })
+     }
      //Local String value
 }
 
-//Start with an array of word choices.
-//Theme: Syonyms for lazy
-//Initialization
+
 
 
 //Need a function that compares letter guesses to the letters in the split word
 //Function that pushes correct guess into split word array
 //^function that takes in user input, checks it against array
 
-// console.log(blanks.getLetters())
+
 
 module.exports = Word;
