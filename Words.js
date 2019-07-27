@@ -8,8 +8,7 @@ function Word (word) {
     this.singleLetters = []
     this.getLetters = function (word) {
         for(let item of word) {
-            this.singleLetters.push(new Letter(item, false))
-            
+            this.singleLetters.push(new Letter(item))
         }
         
     }
