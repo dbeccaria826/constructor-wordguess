@@ -10,15 +10,14 @@ function Word (word) {
         for(let item of word) {
             this.singleLetters.push(new Letter(item))
         }
-        
+        // console.log(this.singleLetters)
     }
-    
-    this.checkCharacterValue = function() {
+    this.getBlanks = function() {
         let stringValue = ""
         this.singleLetters.forEach(item => {
-        //    console.log(stringValue)
+        
           stringValue = stringValue + item.checkCharacter() + " "
-            // stringValue = stringValue + item.checkCharacter() + " " 
+           
         })
         console.log(stringValue)
     }

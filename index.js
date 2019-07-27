@@ -1,49 +1,43 @@
 const inquirer = require("inquirer");
 const Word = require("./Words")
-const gameWord = require("./wordChoices")
+
 //Starts the game, gameWord is passed into getLetters method from new Word object
 //Splits random word from wordChoices array--> pushed into new Letter object
 //Check character value method takes the array of objects and displays blanks based on the true/false value of each letter
 
-function Game () {
-    this.word = "I said good day sir!"
-    this.attempts = 10
-    this.guessesArray = []
-    this.getWord = function() {
-        let theWord = new Word()
-        theWord.getLetters(gameWord)
-        theWord.checkCharacterValue()
-        
-    }
-}
+const wordChoices = ['apathetic','careless','inattentive','lackadasical','weary','slothful','snoozy','laggard'
+,'comatose','dallying','drowsy','lifeless','slack','unindustrious','unconcerned','unpreserving','unready'];
 
-function playGame() {
-    const newGame = new Game();
-   
-    inquirer.prompt([
-        {
-			name:"userInput",
-			message: `${newGame.getWord()} Guess a letter`
-        }
-    ]).then(response =>{
-		console.log(response.userInput)
+const randomWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+//Game continues until all the false values of each letter are true or the player runs out of guesses
+let startGame = () => {
+	let guesses = 10
+	let guessedLetters = []
+	//Create a new object with all the methods of the word constructor
+	
+	const theWord = new Word();
+	theWord.getLetters(randomWord)
+	theWord.getBlanks()
+	
+	inquirer.prompt([
+		{
+			type:'input',
+			name:'guesses',
+			message:"Guess a letter"
+		}
+	]).then(response => {
+		theWord.singleLetters.forEach(item => {
+			item.checkGuess(response.guesses)
+			console.log(item.inProgress)
+		})
+		theWord.getBlanks()
 	})
-
-
-
+		
+	
+	
 }
-   
-playGame()
-// console.log(`Letters guessed: ${newGame.guessesArray}`)
-// console.log(`Your attempts: ${newGame.attempts}`)
-// console.log(newGame.word)
 
-
-//Take user input and compare it against the true/false value of each letter
-//If user guessed at all, starts game.
-//User can only enter letters
-
-
+startGame()
 
 
 

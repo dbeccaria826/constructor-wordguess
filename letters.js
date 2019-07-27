@@ -7,7 +7,7 @@ function Letters (letter) {
        
         if(userGuess === this.letter) {
             this.inProgress = true
-        }
+        } 
     }
     //If a user has guessed a letter game is initialized.
     this.checkCharacter = function () {
