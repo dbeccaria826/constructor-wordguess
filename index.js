@@ -8,39 +8,63 @@ const Word = require("./Words")
 const wordChoices = ['apathetic','careless','inattentive','lackadasical','weary','slothful','snoozy','laggard'
 ,'comatose','dallying','drowsy','lifeless','slack','unindustrious','unconcerned','unpreserving','unready'];
 
-const randomWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+
 //Game continues until all the false values of each letter are true or the player runs out of guesses
 let init = () => {
 	console.log("Welcome to Word Guess CLI Edition: The Theme is Synonyms for Laziness")
-	gameLoop()
+	let theWord = new Word();
+	let randomWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+	theWord.getLetters(randomWord)
+	gameLoop(theWord)
 }
-	const theWord = new Word();
-	theWord.getLetters(randomWord)	
-let gameLoop = () => {
+//Create a new object with all the methods of the word constructor
 	
+//Grabbing user input and matching it with randomword. This function is called until the word is complete
+//Need to exit the function once the word is completed or player runs out of guesses
+let gameLoop = (theWord) => {
 	
-
-
-	//Create a new object with all the methods of the word constructor
 	inquirer.prompt([
 		{
 			type:'input',
 			name:'guesses',
-			message:"Guess a letter"
+			message:"Guess a letter",
+			
 		}
 	]).then(response => {
 		theWord.singleLetters.forEach(item => {
 			item.checkGuess(response.guesses)
-			
 			console.log(item.inProgress)
 		})
 		
 		theWord.getBlanks()
-		gameLoop()
+		for(let index in theWord.singleLetters) {
+			if(!theWord.singleLetters[index].inProgress) {
+				gameLoop(theWord);
+				return;
+			}
+		}
+		
+		continueGame();
+		//Need to exit recursion loop
+		//Need to get a new word when the current word is complete
 	})
-	
 }
 
+let continueGame = () => {
+	inquirer.prompt([
+		{
+			type:"confirm",
+			message:"Would you like to play again?",
+			name:"continue"
+		}
+	]).then(response => {
+		if(response.continue){
+			init()
+		}else {
+			console.log("Thanks for playing")
+		}
+	})
+}
 init()
 
 
