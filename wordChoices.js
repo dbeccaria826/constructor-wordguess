@@ -1,3 +1,4 @@
+//Theme: Synonyms for Lazy
 const wordChoices = ['apathetic','careless','inattentive','lackadasical','weary','slothful','snoozy','laggard'
 ,'comatose','dallying','drowsy','lifeless','slack','unindustrious','unconcerned','unpreserving','unready'];
 
