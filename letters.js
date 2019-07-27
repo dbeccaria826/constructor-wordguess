@@ -11,7 +11,7 @@ function Letters (letter) {
     }
     //If a user has guessed a letter game is initialized.
     this.checkCharacter = function () {
-        if(this.inProgress === true) {
+        if(this.inProgress) {
            return this.letter
         } else {
            return "_"

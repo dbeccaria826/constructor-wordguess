@@ -10,15 +10,18 @@ const wordChoices = ['apathetic','careless','inattentive','lackadasical','weary'
 
 const randomWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
 //Game continues until all the false values of each letter are true or the player runs out of guesses
-let startGame = () => {
-	let guesses = 10
-	let guessedLetters = []
-	//Create a new object with all the methods of the word constructor
-	
+let init = () => {
+	console.log("Welcome to Word Guess CLI Edition: The Theme is Synonyms for Laziness")
+	gameLoop()
+}
 	const theWord = new Word();
-	theWord.getLetters(randomWord)
-	theWord.getBlanks()
+	theWord.getLetters(randomWord)	
+let gameLoop = () => {
 	
+	
+
+
+	//Create a new object with all the methods of the word constructor
 	inquirer.prompt([
 		{
 			type:'input',
@@ -28,17 +31,17 @@ let startGame = () => {
 	]).then(response => {
 		theWord.singleLetters.forEach(item => {
 			item.checkGuess(response.guesses)
+			
 			console.log(item.inProgress)
 		})
-		theWord.getBlanks()
-	})
 		
-	
+		theWord.getBlanks()
+		gameLoop()
+	})
 	
 }
 
-startGame()
-
+init()
 
 
     
