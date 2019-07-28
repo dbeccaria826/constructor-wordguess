@@ -21,11 +21,7 @@ function Word (word) {
         })
         console.log(stringValue)
     }
-     this.userGuess = function(guess) {
-         this.singleLetters.forEach(item => {
-             item.checkGuess(guess)
-        })
-     }
+    
  
 }
 
