@@ -43,7 +43,7 @@ let gameLoop = (theWord) => {
 	]).then(response => {
 		//ForEach loops through each item in the single letters array, calls the checkGuess method 
 		let guess = response.guesses
-		
+		//Checks if user entered more than letter, replaces their input with first letter of input.
 		let checkValid = (guess) => {
 		let guessValid = /^[a-zA-Z]*$/g.exec(guess)
 		if(guess.length > 1) {
