@@ -11,9 +11,11 @@ const wordChoices = ['apathetic','careless','inattentive','lackadasical','weary'
 let guesses = 10;
 let guessedLetters = []
 let guessCorrect = false
+
 //Game continues until all the false values of each letter are true or the player runs out of guesses
 let init = () => {
-	console.log("Welcome to Word Guess CLI Edition: The Theme is Synonyms for Laziness")
+	console.log("\x1b[94m",`Welcome to Word Guess CLI Edition: The Theme is Synonyms for Laziness`)
+	console.log(`\n -------------------------------------------------------------------------\n`)
 	
 	let theWord = new Word();
 	let randomWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
@@ -26,7 +28,6 @@ let init = () => {
 //and do nothing if guessed letter is already in there.	
 //Checking if char pushed into array if it matches any characters in the array, no --, all false = --
 //Grabbing user input and matching it with randomword. This function is called until the word is complete
-//Need to exit the function once the word is completed or player runs out of guesses
 let gameLoop = (theWord) => {
 	
 	inquirer.prompt([
@@ -35,48 +36,71 @@ let gameLoop = (theWord) => {
 			name:'guesses',
 			message:"Guess a letter",
 			
+			
+			
 		}
+		//This is where all the logic happens
 	]).then(response => {
+		//ForEach loops through each item in the single letters array, calls the checkGuess method 
+		let guess = response.guesses
+		
+		let checkValid = (guess) => {
+		let guessValid = /^[a-zA-Z]*$/g.exec(guess)
+		if(guess.length > 1) {
+		console.log("enter a single letter")
+		return guess.replace(guess, guessValid[0].split("")[0])
+		
+		}
+		}
+		
+		
 		theWord.singleLetters.forEach(item => {
-			item.checkGuess(response.guesses.charAt(0))
+			item.checkGuess(guess.charAt(0))
 		})
 		
-		//console.log(guessedLetters.includes(response.guesses.charAt(0)))
+		
 		if(guessedLetters.length === 0){
-			guessedLetters.push(response.guesses);
-			checkIfCorrect(theWord,response.guesses.charAt(0))
+			guessedLetters.push(checkValid(guess));
+			checkIfCorrect(theWord,guess.charAt(0))
+			
+			
 		}else{
-			if(guesses > 0 && guessedLetters.includes(response.guesses.charAt(0)) === false) {
-				guessedLetters.push(response.guesses);
-				checkIfCorrect(theWord,response.guesses.charAt(0))
+			if(guesses > 0 && guessedLetters.includes(guess.charAt(0)) === false) {
+				guessedLetters.push(checkValid(guess));
+				checkIfCorrect(theWord,guess.charAt(0))
+				console.log("\x1b[34m",`Letters Guessed: ${guessedLetters.join(" ")}`)
 			}
 		}
-		
 		theWord.getBlanks()
 		if(guessCorrect) {
 			guessCorrect = false
 		} else {
 			guesses--
-			console.log(`Your guesses : ${guesses}`)
+			console.log("\x1b[34m",`Your guesses : ${guesses}`)
 		}
 
 		
 		if(guesses ===  0){
+			console.log("\x1b[31m", `You Lost!, Retry?`)
 			continueGame();
-		}else{
 
+		}else{
+			
+		//Calls the gameloop function when each letter in the array no longer has the property "false"
 		for(let index in theWord.singleLetters) {
 			if(!theWord.singleLetters[index].inProgress) {
+				
 				gameLoop(theWord);
 				return;
 			}
 		}
+		
+		console.log("\x1b[32m", `You Won!`)
 		continueGame();
 	}
 		
 		
-		//Need to exit recursion loop
-		//Need to get a new word when the current word is complete
+		
 	})
 }
 //what if our responses are correct? Don't push to guessedLetters and don't subtract 1 from guesses
@@ -84,9 +108,13 @@ let checkIfCorrect = (theWord, char) => {
 	for(let index in theWord.singleLetters) {
 		if(char === theWord.singleLetters[index].letter) {
 			guessCorrect = true;
+			console.log("\x1b[32m","Correct!")
 		}
 	}
 }
+
+
+
 
 let continueGame = () => {
 	inquirer.prompt([
@@ -102,7 +130,7 @@ let continueGame = () => {
 			guessCorrect = false
 			init()
 		}else {
-			console.log("Thanks for playing")
+			console.log("\x1b[93m","Thanks for playing")
 		}
 	})
 }

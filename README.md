@@ -1,3 +1,6 @@
 # constructor-wordguess
+## A CLI Based Word Guess Game
 
-A word guessing game you can play entirely in the command line
+<hr>
+
+
