@@ -68,7 +68,7 @@ let gameLoop = (theWord) => {
 			if(guesses > 0 && guessedLetters.includes(guess.charAt(0)) === false) {
 				guessedLetters.push(checkValid(guess));
 				checkIfCorrect(theWord,guess.charAt(0))
-				console.log("\x1b[34m",`Letters Guessed: ${guessedLetters.join(" ")}`)
+				console.log(`Letters Guessed: ${guessedLetters.join(" ")}`)
 			}
 		}
 		theWord.getBlanks()
@@ -76,12 +76,12 @@ let gameLoop = (theWord) => {
 			guessCorrect = false
 		} else {
 			guesses--
-			console.log("\x1b[34m",`Your guesses : ${guesses}`)
+			console.log(`Your guesses : ${guesses}`)
 		}
 
 		
 		if(guesses ===  0){
-			console.log("\x1b[31m", `You Lost!, Retry?`)
+			console.log(`You Lost!, Retry?`)
 			continueGame();
 
 		}else{
