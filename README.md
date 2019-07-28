@@ -29,6 +29,18 @@
 
 - Picking either choice creates a new word and the game resumes.
 
+**Video Demonstration:** https://drive.google.com/file/d/1uy3Pwh5bBcJkAUKFSW3b9jZb-fkxFZks/view
+
+<hr>
+<h3>Images</h3>
+<ul>
+<li><img src="./images/win.PNG"></li>
+<li><img src="./images/endgame.PNG"></li>
+<li><img src="./images/start.PNG"></li>
+</ul>
+
+
+
 
 
 
