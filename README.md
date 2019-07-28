@@ -34,9 +34,9 @@
 <hr>
 <h3>Images</h3>
 <ul>
-<li><img src="./images/win.png"></li>
 <li><img src="./images/endgame.png"></li>
-<li><img src="./images/start.png"></li>
+<li><img src="./images/win.PNG"></li>
+<li><img src="./images/start.PNG"></li>
 </ul>
 
 
